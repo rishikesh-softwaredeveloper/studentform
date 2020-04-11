@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student-Application</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="./css/style.css">
+     </head>
+    
+    <script>
+        function showHint(str) {
+    if (str.length == 0) {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "check.php?uname=" + str, true);
+        xmlhttp.send();
+    }
+}
+// Function to check Whether both passwords 
+            // is same or not. 
+            function checkPassword(form) { 
+                password1 = form.pwd.value; 
+                password2 = form.cpwd.value; 
+  
+                    
+             if (password1 != password2) { 
+                    alert ("\nPassword did not match: Please try again...") 
+                    return false; 
+                } 
+  
+                // If same return True. 
+                else{ 
+                    return true; 
+                } 
+            } 
+    </script>
+    <body>
+        <h1 style="text-align: center;">Student Registration Form</h1>
+        <div class="container">
+        <form  class="form-horizontal" onSubmit = "return checkPassword(this)" action="register.php" method="get">
+        <div class="form-group"> 
+                 <label class="control-label col-sm-2" for="uname">Username</label>
+            <div class="col-lg-12">
+                <input class="stuform" type="text" id="uname" name="uname" onkeyup="showHint(this.value)" required>
+            </div>
+        </div>
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="name">Name</label>
+            <div class="col-lg-12">
+                <input " class="stuform" type="text" id="name" name="name" required>
+            </div>
+        </div>
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="fname">Father Name</label>
+            <div class="col-lg-12">
+                <input " class="stuform" type="text" id="fname" name="fname" required>
+            </div>
+        </div>
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="dob">Date Of Birth</label>
+            <div class="col-lg-12">
+                <input  class="stuform" type="text" id="dob" name="dob" required>
+            </div>
+        </div>
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd"> Password</label>
+        	<div class="col-lg-12">
+                <input class="stuform" id="pwd"  type="password" name="pwd" required>
+            </div>
+        </div>
+        <div class="form-group">
+                <label class="control-label col-sm-2" for="cpwd">Confirm Password</label>
+            <div class="col-lg-12">
+                <input class="stuform" id="cpwd" type="password" onblur="check()" name="cpwd" required>
+            </div>
+        </div>
+               <input type=submit value="register">
+        </form>
+            <h1>Suggestions: <span id="txtHint"></span></h1>
+        </div>
+    </body>
+</html>
